@@ -1,0 +1,27 @@
+name: Tests Selenium
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  selenium-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Recuperer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Installer Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Installer les dependances
+        run: pip install -r requirements.txt
+
+      - name: Executer les tests
+        run: python -m pytest -v
